@@ -1,0 +1,69 @@
+# Deployment object to deploy webservice 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: favtree-deployment
+  namespace: default
+  labels:
+    app: favtree
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: favtree
+  template:
+    metadata:
+      labels:
+        app: favtree
+    spec:
+      containers:
+      - name: fav-tree
+        image: favtree:1.0
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+
+---
+# Service object for webservice
+apiVersion: v1
+kind: Service
+metadata: 
+  name: favtree-service
+  namespace: default
+spec:
+  selector: 
+    app: favtree 
+  type: ClusterIP   
+  ports:
+    - name: tcp-port
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
+
+---
+# Ingress object to access webservice
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: favtree-ingress
+  namespace: default
+spec:
+  rules:
+  - host: local.tree.org
+    http:
+      paths:
+        - path: /tree
+          pathType: Prefix
+          backend:
+            service:
+              name: favtree-service
+              port:
+                number: 5000
+
+
+
+             
+           
+
+     
