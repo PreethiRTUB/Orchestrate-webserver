@@ -10,14 +10,14 @@ The following dependencies need to be installed in order to run the webserver
 - [`Install minikube`] (https://minikube.sigs.k8s.io/docs/start/)
 
 ### Execution Steps
-1. Execute the below command to deploy the webserver
+1. Execute the below command to deploy the webserver and access api in one command
 ```
 $ bash run.sh
 or 
 $ ./run.sh
 ```
 
-2. To query the endpoint execute below commands
+2. Once the `runs.sh` is successfully executed, to query the endpoint execute below commands
 ```
 export MINIKUBE_IP_ADDRESS=$(minikube ip)
 export PORT=80
