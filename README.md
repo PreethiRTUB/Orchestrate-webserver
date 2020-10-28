@@ -11,6 +11,15 @@ The following dependencies need to be installed in order to run the webserver
 
 ### Execution Steps
 1. Execute the below command to deploy the webserver and access api in one command
+
+Actions Performed by run.sh
+- Starts the minikube
+- Enables the ingree addon
+- Set the eval to docker env context
+- Build the image
+- Apply the kubernetes manifests
+- Query the endpoint and display the result
+
 ```
 $ bash run.sh
 or 
@@ -26,6 +35,13 @@ curl $MINIKUBE_IP_ADDRESS:$PORT/tree -H Host:$HOST_NAME
 ```
 
 ### Clean up script
+Execute the below command to clean
+
+Actions Performed by cleanup.sh
+- Removes the kubernetes objects
+- Disable the ingree addon
+- Unset the eval to docker env context
+- Stop the minikube
 ```
 $ bash cleanup.sh
 or 
