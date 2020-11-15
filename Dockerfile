@@ -1,7 +1,11 @@
+# ARG can be used to dynamically build the version of base image
 ARG ALPINE_VERSION=3.12
 
 # base image
 FROM alpine:${ALPINE_VERSION}
+
+# upgrade apk
+RUN apk --no-cache upgrade
 
 # Set port env variable
 ENV HTTP_PORT 5000
