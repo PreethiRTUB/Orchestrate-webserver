@@ -43,7 +43,13 @@ PORT=80
 
 echo "***** RESULT *****"
 
-# Get the webserver response
+# Get my favourite tree
 curl $MINIKUBE_IP_ADDRESS:$PORT/tree -H Host:$HOST_NAME
 
+# Test response
+RESULT=$(curl $MINIKUBE_IP_ADDRESS:$PORT/tree -H Host:$HOST_NAME | jq '.myFavouriteTree' == "Banyan Tree"')
+if [ "$RESULT" = false ]; then
+    echo "Failed to get favourite tree"
+    exit 3
+fi
 echo "***** RESULT *****"
